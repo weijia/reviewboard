@@ -47,7 +47,7 @@ WHITESPACE_RE = re.compile(r'\s')
 # display in collapsed regions of diffs and diff fragments in reviews.
 HEADER_REGEXES = {
     '.cs': [
-        re.compile(
+        re.compile( 
             r'^\s*((public|private|protected|static)\s+)+'
             r'([a-zA-Z_][a-zA-Z0-9_\.\[\]]*\s+)+?'     # return arguments
             r'[a-zA-Z_][a-zA-Z0-9_]*'                  # method name
@@ -1036,7 +1036,7 @@ def get_diff_files(diffset, filediff=None, interdiffset=None,
         tool = filediff.diffset.repository.get_scmtool()
         depot_filename = tool.normalize_path_for_display(filediff.source_file)
         dest_filename = tool.normalize_path_for_display(filediff.dest_file)
-
+        #print filediff
         file = {
             'depot_filename': depot_filename,
             'dest_filename': dest_filename or depot_filename,
@@ -1075,6 +1075,12 @@ def get_diff_files(diffset, filediff=None, interdiffset=None,
                     large_data=True)
 
             file['chunks'] = chunks
+            from reviewboard.extensions.hooks import ChunkGenerationCompleteHook
+            #print ChunkGenerationCompleteHook.hooks
+            for i in ChunkGenerationCompleteHook.hooks:
+                i.processChunks(chunks)
+            #print chunks
+            
             file['changed_chunk_indexes'] = []
             file['whitespace_only'] = True
 
@@ -1089,7 +1095,7 @@ def get_diff_files(diffset, filediff=None, interdiffset=None,
                         file['whitespace_only'] = False
 
             file['num_changes'] = len(file['changed_chunk_indexes'])
-
+        #print file
         files.append(file)
 
     def cmp_file(x, y):

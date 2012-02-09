@@ -35,6 +35,15 @@ class NavigationBarHook(ExtensionHook):
     def get_entries(self, context):
         return self.entries
 
+####################################################
+# Added by Weijia
+####################################################
+class ChunkGenerationCompleteHook(ExtensionHook):
+    __metaclass__ = ExtensionHookPoint
+    
+    def processChunks(self, chunks):
+        pass
+    
 
 class ReviewRequestDetailHook(ExtensionHook):
     __metaclass__ = ExtensionHookPoint
