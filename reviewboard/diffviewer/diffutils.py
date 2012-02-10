@@ -1078,7 +1078,7 @@ def get_diff_files(diffset, filediff=None, interdiffset=None,
             from reviewboard.extensions.hooks import ChunkGenerationCompleteHook
             #print ChunkGenerationCompleteHook.hooks
             for i in ChunkGenerationCompleteHook.hooks:
-                i.processChunks(chunks)
+                i.processChunks(filediff, chunks)
             #print chunks
             
             file['changed_chunk_indexes'] = []

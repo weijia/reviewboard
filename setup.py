@@ -67,7 +67,7 @@ class BuildMedia(Command):
         pass
 
     def run(self):
-        retcode = subprocess.call(['./reviewboard/manage.py', 'synccompress',
+        retcode = subprocess.call(['C:\\Python25\\python.exe', './reviewboard/manage.py', 'synccompress',
                                    '--force'])
 
         if retcode != 0:

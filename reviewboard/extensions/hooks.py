@@ -41,7 +41,7 @@ class NavigationBarHook(ExtensionHook):
 class ChunkGenerationCompleteHook(ExtensionHook):
     __metaclass__ = ExtensionHookPoint
     
-    def processChunks(self, chunks):
+    def processChunks(self, file_diff, chunks):
         pass
     
 
